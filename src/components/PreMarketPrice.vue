@@ -29,7 +29,7 @@
       max="500"
       step="10"
     />
-    <label for="trade-price">Adjust the grain price in Vuezuela</label>
+    <label for="trade-price">Grain price in Vuezuela: €{{ tradePrice }}</label>
   </div>
 </template>
 <script setup lang="ts">

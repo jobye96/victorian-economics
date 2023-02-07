@@ -8,7 +8,14 @@
   The total buy orders for grain in the province is ({{ defaultOrders }} +
   {{ childOrders }} + {{ upperclassOrders }}) = <br />
   {{ buyOrders.toLocaleString() }}
-  <input v-model="totalPop" type="range" max="2000000" step="10000" />
+  <input
+    v-model="totalPop"
+    id="state-pop"
+    type="range"
+    max="2000000"
+    step="10000"
+  />
+  <label for="state-pop">Population in the state: {{ totalPop }}</label>
 </template>
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";

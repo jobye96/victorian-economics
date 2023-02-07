@@ -3,9 +3,19 @@
     This {{ resourceType }} {{ building() }} produces {{ resourceLoad }}
     {{ resourceType }} units employing {{ numWorkers.toLocaleString() }} people.
   </p>
-  <input v-model="numWorkers" type="range" max="5000" step="500" /> <br />
-  <label for="is-tooled">Use Tools?</label>
+  <label for="is-tooled">Use Tools? </label>
   <input v-model="isTooled" type="checkbox" id="is-tooled" /><br />
+  <div>
+    <input
+      v-model="numWorkers"
+      id="num-workers"
+      type="range"
+      max="5000"
+      step="500"
+    />
+    <label for="num-workers">Number of workers: {{ numWorkers }}</label>
+  </div>
+  <br />
 </template>
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";

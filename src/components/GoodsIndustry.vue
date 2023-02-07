@@ -3,7 +3,8 @@
     This industry uses {{ grainInput }} grain and {{ toolInput }} tools. It
     produces {{ good }} groceries employing {{ labour }} people.
   </p>
-  <input type="range" v-model="labour" max="5000" step="500" />
+  <input type="range" v-model="labour" id="labour" max="5000" step="500" />
+  <label for="labour">Number of employees: {{ labour }}</label>
 </template>
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";

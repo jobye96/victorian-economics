@@ -4,7 +4,15 @@
     {{ infrastructureUsage }} infrastructure out of
     {{ maxInfrastructure }} available.
   </p>
-  <input v-model="infrastructureUsage" type="range" max="200" />
+  <input
+    v-model="infrastructureUsage"
+    id="infra-usage"
+    type="range"
+    max="200"
+  />
+  <label for="infra-usage"
+    >Infrastructure used: {{ infrastructureUsage }}</label
+  >
 </template>
 <script setup lang="ts">
 import { computed, ref } from "vue";
