@@ -12,12 +12,13 @@
   goods depending on the order difference in our market and the trade price of
   the other market.
   <br />
-  Our traders have a starting capital of €{{ startCapital.toLocaleString() }}
-  with which they end up buying/selling
+  Our traders buy/ sell
   {{ tradeAmount.toLocaleString() }}
-  goods. This costs them €{{ tradeCost.toLocaleString() }} to buy from one
-  market and sells for €{{ tradeRevenue.toLocaleString() }} in the other. They
-  earn €{{ perGoodsProfit.toLocaleString() }} per item traded.
+  goods. They pay €{{ tradeCost.toLocaleString() }} to buy from one market and
+  sell for €{{ tradeRevenue.toLocaleString() }} in the other. They earn €{{
+    perGoodsProfit.toLocaleString()
+  }}
+  per item traded.
   <br />
   <div>
     <input
@@ -55,13 +56,8 @@ const orderDifference = computed(() => {
   return Math.abs(props.sellOrders - props.buyOrders);
 });
 // TODO: the trade amount should be dependent on the trade price somehow
-const startCapital = 2000000;
 const tradeAmount = computed(() => {
-  if (orderDifference.value * tradePrice.value > startCapital) {
-    return Math.floor(startCapital / tradePrice.value);
-  } else {
-    return orderDifference.value;
-  }
+  return 0.5 * orderDifference.value;
 });
 
 const tradeCost = computed(() => {

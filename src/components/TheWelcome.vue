@@ -29,7 +29,7 @@
 
     Industries turn Resources into other goods, using Labour and Tools.
     Infrastructure also affects how much of this goes to the market.
-    <GoodsIndustry />
+    <GoodsIndustry @buy-orders="(n:number) => (industryBought = n)" />
   </WelcomeItem>
   <WelcomeItem>
     <template #icon>
@@ -39,7 +39,7 @@
 
     The population consumes goods depending on their Wealth. This creates buy
     orders on the market. <br />
-    <PopConsumption @buy-orders="(n:number) => (totalBought = n)" />
+    <PopConsumption @buy-orders="(n:number) => (popBought = n)" />
   </WelcomeItem>
   <WelcomeItem>
     <template #icon>
@@ -99,7 +99,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import WelcomeItem from "./WelcomeItem.vue";
 import DocumentationIcon from "./icons/IconDocumentation.vue";
 import InfrastructureIcon from "./icons/IconInfrastructure.vue";
@@ -110,5 +110,9 @@ import GoodsIndustry from "@/components/GoodsIndustry.vue";
 import PopConsumption from "@/components/PopConsumption.vue";
 import PreMarketPrice from "@/components/PreMarketPrice.vue";
 let totalOrder = ref(4000);
-let totalBought = ref(20000);
+let industryBought = ref(3000);
+let popBought = ref(12000);
+let totalBought = computed(() => {
+  return popBought.value + industryBought.value;
+});
 </script>

@@ -6,7 +6,7 @@
   <input type="range" v-model="labour" max="5000" step="500" />
 </template>
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 const maxGrain = 5000;
 const maxTools = 2000;
 
@@ -27,5 +27,10 @@ const employment = computed(() => {
 
 const good = computed(() => {
   return maxOutput * employment.value;
+});
+
+const emit = defineEmits(["buy-orders"]);
+watch(grainInput, (newInput) => {
+  emit("buy-orders", newInput);
 });
 </script>

@@ -6,10 +6,9 @@
   <input v-model="numWorkers" type="range" max="5000" step="500" /> <br />
   <label for="is-tooled">Use Tools?</label>
   <input v-model="isTooled" type="checkbox" id="is-tooled" /><br />
-  <button @click="updateOrders()">update</button>
 </template>
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 const props = defineProps({
   resourceType: String,
 });
@@ -43,9 +42,8 @@ const resourceLoad = computed(() => {
   }
   return output;
 });
-
 const emit = defineEmits(["sell-orders"]);
-function updateOrders(): void {
-  emit("sell-orders", resourceLoad.value);
-}
+watch(resourceLoad, (newLoad) => {
+  emit("sell-orders", newLoad);
+});
 </script>

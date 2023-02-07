@@ -9,10 +9,9 @@
   {{ childOrders }} + {{ upperclassOrders }}) = <br />
   {{ buyOrders.toLocaleString() }}
   <input v-model="totalPop" type="range" max="2000000" step="10000" />
-  <button @click="updateOrders()">update</button>
 </template>
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 const totalPop = ref(500000);
 const childPercent = 0.5;
 const childPop = computed(() => {
@@ -48,7 +47,8 @@ const buyOrders = computed(() => {
 });
 
 const emit = defineEmits(["buy-orders"]);
-function updateOrders(): void {
-  emit("buy-orders", buyOrders.value);
-}
+
+watch(buyOrders, (newOrders) => {
+  emit("buy-orders", newOrders);
+});
 </script>
