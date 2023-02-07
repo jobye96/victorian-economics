@@ -19,7 +19,7 @@
     <template #heading>2. Market Access</template>
 
     The amount of resources on the market depends on Infrastructure.
-    <MarketAccess />
+    <MarketAccess @market-access="(n: number) => (access = n)" />
   </WelcomeItem>
   <WelcomeItem>
     <template #icon>
@@ -112,7 +112,8 @@ import PreMarketPrice from "@/components/PreMarketPrice.vue";
 let totalOrder = ref(4000);
 let industryBought = ref(3000);
 let popBought = ref(12000);
+let access = ref(100);
 let totalBought = computed(() => {
-  return popBought.value + industryBought.value;
+  return ((popBought.value + industryBought.value) * access.value) / 100;
 });
 </script>

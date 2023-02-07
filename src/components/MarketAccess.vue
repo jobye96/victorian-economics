@@ -15,7 +15,7 @@
   >
 </template>
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 const infrastructureUsage = ref(20);
 const maxInfrastructure = 50;
 const access = computed(() => {
@@ -24,5 +24,9 @@ const access = computed(() => {
   } else {
     return 100;
   }
+});
+const emit = defineEmits(["market-access"]);
+watch(access, (newAccess) => {
+  emit("market-access", newAccess);
 });
 </script>
