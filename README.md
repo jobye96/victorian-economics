@@ -2,13 +2,10 @@
 
 Newbie programmer creating my first project. Doing this as a learning experience during downtime at my workplace https://lighthouse8.com 
 Mostly based on this article: https://www.gamedeveloper.com/design/deep-dive-modeling-the-global-economy-in-victoria-3
-<<<<<<< HEAD
-Template found on: https://vueschool.io/lessons/vue-fundamentals-capi-local-setup-with-vite Page on https://jobye96.github.io/victorian-economics 
+Template found on: https://vueschool.io/lessons/vue-fundamentals-capi-local-setup-with-vite 
+Page on https://jobye96.github.io/victorian-economics 
 
-=======
-Template found on: https://vueschool.io/lessons/vue-fundamentals-capi-local-setup-with-vite
-Page on https://jobye96.github.io/victorian-economics
->>>>>>> 0ebcb2bbe5b6cb7830b025a3ce0170ef6f43762b
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
