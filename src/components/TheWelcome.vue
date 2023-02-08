@@ -50,7 +50,7 @@
     A preliminary market price is set from the amount of buy and sell orders.
     This price affects how much of the goods that are traded. The profit goes to
     traders in trade centers.<br />
-    <PreMarketPrice :buy-orders="totalBought" :sell-orders="totalOrder" />
+    <PreMarketPrice :buy-orders="totalBought" :sell-orders="accessOrder" />
   </WelcomeItem>
   <WelcomeItem>
     <template #icon>
@@ -109,11 +109,15 @@ import MarketAccess from "@/components/MarketAccess.vue";
 import GoodsIndustry from "@/components/GoodsIndustry.vue";
 import PopConsumption from "@/components/PopConsumption.vue";
 import PreMarketPrice from "@/components/PreMarketPrice.vue";
-let totalOrder = ref(4000);
-let industryBought = ref(3000);
-let popBought = ref(12000);
-let access = ref(100);
-let totalBought = computed(() => {
+// import PostMarketPrice from "@components/PostMarketPrice.vue";
+const totalOrder = ref(4000);
+const accessOrder = computed(() => {
+  return (totalOrder.value * access.value) / 100;
+});
+const industryBought = ref(3000);
+const popBought = ref(12000);
+const access = ref(100);
+const totalBought = computed(() => {
   return ((popBought.value + industryBought.value) * access.value) / 100;
 });
 </script>

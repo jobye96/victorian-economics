@@ -25,8 +25,8 @@
       v-model="tradePrice"
       id="trade-price"
       type="range"
-      min="200"
-      max="500"
+      min="100"
+      max="1000"
       step="10"
     />
     <label for="trade-price">Grain price in Vuezuela: €{{ tradePrice }}</label>
