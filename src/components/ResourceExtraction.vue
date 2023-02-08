@@ -42,7 +42,7 @@ const building = (): String => {
 };
 const maxLabour = 5000;
 const maxGrain = 10000;
-const numWorkers = ref(2000);
+const numWorkers = ref(3500);
 const isTooled = ref(false);
 
 const resourceLoad = computed(() => {

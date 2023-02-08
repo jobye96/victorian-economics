@@ -12,7 +12,7 @@
     v-model="totalPop"
     id="state-pop"
     type="range"
-    max="2000000"
+    max="1000000"
     step="10000"
   />
   <label for="state-pop">Population in the state: {{ totalPop }}</label>

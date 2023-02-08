@@ -31,9 +31,10 @@
     />
     <label for="trade-price">Grain price in Vuezuela: €{{ tradePrice }}</label>
   </div>
+  €{{ priceDifference.toLocaleString() }} price difference
 </template>
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 const props = defineProps({
   sellOrders: { type: Number, required: true },
   buyOrders: { type: Number, required: true },
@@ -55,9 +56,14 @@ const marketPrice = computed(() => {
 const orderDifference = computed(() => {
   return Math.abs(props.sellOrders - props.buyOrders);
 });
+const priceDifference = computed(() => {
+  return Math.abs(marketPrice.value - tradePrice.value);
+});
 // TODO: the trade amount should be dependent on the trade price somehow
 const tradeAmount = computed(() => {
-  return 0.5 * orderDifference.value;
+  return Math.floor(
+    (0.2 * orderDifference.value * priceDifference.value) / basePrice.value
+  );
 });
 
 const tradeCost = computed(() => {
@@ -76,5 +82,13 @@ const tradeRevenue = computed(() => {
 });
 const perGoodsProfit = computed(() => {
   return (tradeRevenue.value - tradeCost.value) / tradeAmount.value;
+});
+const emit = defineEmits(["trade-orders"]);
+watch(tradeAmount, (updatedTradeAmount) => {
+  if (marketPrice.value > tradePrice.value) {
+    emit("trade-orders", updatedTradeAmount);
+  } else {
+    emit("trade-orders", -updatedTradeAmount);
+  }
 });
 </script>

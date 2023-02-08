@@ -9,7 +9,7 @@
     extract a Resource.
     <ResourceExtraction
       resource-type="grain"
-      @sell-orders="(n: number) => (totalOrder = n)"
+      @sell-orders="(n: number) => (ResourceSold = n)"
     />
   </WelcomeItem>
   <WelcomeItem>
@@ -50,7 +50,13 @@
     A preliminary market price is set from the amount of buy and sell orders.
     This price affects how much of the goods that are traded. The profit goes to
     traders in trade centers.<br />
-    <PreMarketPrice :buy-orders="totalBought" :sell-orders="accessOrder" />
+    <PreMarketPrice
+      :buy-orders="totalBought"
+      :sell-orders="totalSold"
+      @trade-orders="(n:number) => (tradeOrder = n)"
+    />
+    <br />
+    trade orders {{ tradeOrder }}
   </WelcomeItem>
   <WelcomeItem>
     <template #icon>
@@ -60,7 +66,12 @@
     The total amount of buy- and sell orders from buildings, pops and trade go
     together to calculate the nationwide market price of goods. Every agent that
     has bought or sold goods receives (or pays) an amount of £ to/from its
-    wallet.
+    wallet. <br />
+    <PostMarketPrice
+      :buy-orders="totalBought"
+      :sell-orders="totalSold"
+      :trade-orders="tradeOrder"
+    />
   </WelcomeItem>
   <WelcomeItem>
     <template #icon>
@@ -94,7 +105,8 @@
     </template>
     <template #heading>10. Reset</template>
     All economic data is now wiped clean, except for what has been stored as £
-    in buildings or treasuries or Wealth in population.
+    in buildings or treasuries or Wealth in population. The entire process
+    starts again from step 1.
   </WelcomeItem>
 </template>
 
@@ -109,14 +121,15 @@ import MarketAccess from "@/components/MarketAccess.vue";
 import GoodsIndustry from "@/components/GoodsIndustry.vue";
 import PopConsumption from "@/components/PopConsumption.vue";
 import PreMarketPrice from "@/components/PreMarketPrice.vue";
-// import PostMarketPrice from "@components/PostMarketPrice.vue";
-const totalOrder = ref(4000);
-const accessOrder = computed(() => {
-  return (totalOrder.value * access.value) / 100;
+import PostMarketPrice from "@/components/PostMarketPrice.vue";
+const ResourceSold = ref(7000);
+const totalSold = computed(() => {
+  return (ResourceSold.value * access.value) / 100;
 });
 const industryBought = ref(3000);
-const popBought = ref(12000);
+const popBought = ref(24000);
 const access = ref(100);
+const tradeOrder = ref(5500);
 const totalBought = computed(() => {
   return ((popBought.value + industryBought.value) * access.value) / 100;
 });
